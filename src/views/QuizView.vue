@@ -1,20 +1,31 @@
 <template>
   <div class="quiz">
-    <h1>This is a quiz page</h1>
-
     <p>Quiz id: {{ id }}</p>
+    <TimerBar @time-is-up="stopQuestion" />
   </div>
 </template>
 
 <script>
+import TimerBar from '@/components/TimerBar.vue';
+
 export default {
   name: 'QuizView',
 
   data() {
     return {
-      quiz: {},
       id: this.$route.params.id,
+      timeIsUp: false,
     };
+  },
+
+  methods: {
+    stopQuestion() {
+      console.log('Time is up!');
+    },
+  },
+
+  components: {
+    TimerBar,
   },
 };
 </script>
