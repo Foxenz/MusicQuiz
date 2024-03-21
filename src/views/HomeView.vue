@@ -15,7 +15,6 @@
 
 <script>
 import CategoryButton from '@/components/CategoryButton.vue';
-import axios from 'axios';
 import ApiHandler from '@/services/api/apiHandler';
 
 export default {
