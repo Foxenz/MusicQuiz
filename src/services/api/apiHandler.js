@@ -26,10 +26,11 @@ class ApiHandler {
     return res.data;
   };
 
-  getNbActivateCategories = async () => {
+  getIdCategoriesActivated = async () => {
     const res = await this.axiosInstance('categories?is_active=1');
+    const id = res.data.map((category) => category.id);
 
-    return res.data.length;
+    return id;
   };
 }
 

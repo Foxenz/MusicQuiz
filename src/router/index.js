@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import ApiHandler from '@/services/api/apiHandler';
 
 const apiHandler = new ApiHandler();
-const nbCategories = await apiHandler.getNbActivateCategories();
+const idCategoriesActivated = await apiHandler.getIdCategoriesActivated();
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,7 +19,7 @@ const router = createRouter({
       component: () => import('../views/QuizView.vue'),
       beforeEnter: (to, from, next) => {
         const quizId = Number(to.params.id);
-        if (quizId > 0 && quizId <= nbCategories) {
+        if (idCategoriesActivated.includes(quizId)) {
           next();
         } else {
           next({ name: 'not-found' });
