@@ -13,10 +13,10 @@
         Désole, la page que vous cherchez n'existe pas.
       </p>
       <div class="mt-10 flex items-center justify-center gap-x-6">
-        <a
-          @click="$router.push('/')"
+        <router-link
+          to="/"
           class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >Retour à l'accueil</a
+          >Retour à l'accueil</router-link
         >
       </div>
     </div>
