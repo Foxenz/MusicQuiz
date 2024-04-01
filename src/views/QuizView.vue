@@ -23,7 +23,9 @@ export default {
     data() {
         return {
             id: this.$route.params.id,
+            currentQuestion: 0,
             timeIsUp: false,
+            questions: Array,
             question: {content: {}, answer: ''},
             rightAnswer: false,
         };
@@ -35,6 +37,17 @@ export default {
         },
         handleRightAnswer(isCorrect) {
             this.rightAnswer = isCorrect;
+        },
+        async fetchQuestionList() {
+          const res = await apiHandler.fetchQuestionsForCategory(this.id);
+
+            console.log("Question List: ", res)
+          this.questions = res.questions
+        },
+        async fetchQuestion(questionID) {
+            const response = await apiHandler.fetchOneQuestionForCategory(this.id, questionID);
+
+            this.question = response.questions[0];
         }
     },
 
@@ -44,9 +57,9 @@ export default {
     },
 
     async created() {
-        const response = await apiHandler.fetchOneQuestionForCategory(2, 11);
-
-        this.question = response.questions[0];
+        await this.fetchQuestionList();
+        console.log("current quest: ", this.questions[this.currentQuestion])
+        await this.fetchQuestion(this.questions[this.currentQuestion].id)
     }
 };
 </script>
