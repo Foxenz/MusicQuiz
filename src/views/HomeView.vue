@@ -1,12 +1,7 @@
 <template>
   <main class="h-full grid grid-cols-2 gap-4 justify-items-center items-center">
-    <CategoryButton
-      v-for="category in categories"
-      :key="category.id"
-      :categoryName="category.title"
-      :categoryId="category.id"
-      :disabled="!category.is_active"
-    />
+    <CategoryButton v-for="category in categories" :key="category.id" :categoryName="category.title"
+      :categoryId="category.id" :disabled="!category.is_active" />
   </main>
 </template>
 
