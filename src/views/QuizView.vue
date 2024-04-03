@@ -8,6 +8,9 @@
             @rightAnswer="handleRightAnswer"
         />
     </div>
+    <template v-if="rightAnswer !== null">
+        <button>Next</button>
+    </template>
 </template>
 
 <script>
@@ -27,7 +30,7 @@ export default {
             timeIsUp: false,
             questions: Array,
             question: {content: {}, answer: ''},
-            rightAnswer: false,
+            rightAnswer: null,
         };
     },
 
@@ -41,7 +44,6 @@ export default {
         async fetchQuestionList() {
           const res = await apiHandler.fetchQuestionsForCategory(this.id);
 
-            console.log("Question List: ", res)
           this.questions = res.questions
         },
         async fetchQuestion(questionID) {
@@ -58,7 +60,6 @@ export default {
 
     async created() {
         await this.fetchQuestionList();
-        console.log("current quest: ", this.questions[this.currentQuestion])
         await this.fetchQuestion(this.questions[this.currentQuestion].id)
     }
 };
