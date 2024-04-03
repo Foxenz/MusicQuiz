@@ -1,15 +1,8 @@
 <template>
   <main>
-    <CategoryButton
-      v-for="category in categories"
-      :key="category.id"
-      :categoryName="category.title"
-      :categoryId="category.id"
-      backgroundColorButton="orange"
-      hoverBackgroundColorButton="red"
-      @click="goToQuizzPage(category.id)"
-      :disabled="!category.is_active"
-    />
+    <CategoryButton v-for="category in categories" :key="category.id" :categoryName="category.title"
+      :categoryId="category.id" backgroundColorButton="orange" hoverBackgroundColorButton="red"
+      @click="goToQuizzPage(category.id)" :disabled="!category.is_active" />
   </main>
 </template>
 
