@@ -58,6 +58,7 @@ export default {
 
   methods: {
     stopQuestion() {
+      console.log('Time is up');
       this.rightAnswer = false;
       this.timeIsUp = true;
     },
