@@ -1,5 +1,4 @@
 <template>
-
   <div class="quiz">
     <p>Quiz id: {{ id }}</p>
     <Question :question="question" />
@@ -12,10 +11,10 @@
 </template>
 
 <script>
+import Question from "@/components/Question.vue";
 import TimerBar from '@/components/TimerBar.vue';
 import ApiHandler from "@/services/api/apiHandler.js";
 import Answer from "@/components/Answer.vue";
-import Question from "@/components/Question.vue";
 
 const apiHandler = new ApiHandler();
 
@@ -27,7 +26,7 @@ export default {
       id: this.$route.params.id,
       currentQuestion: 0,
       timeIsUp: false,
-      questions: Array,
+      questions: [], // Initialize as an empty array
       question: { content: {}, answer: '' },
       rightAnswer: null,
     };
@@ -42,25 +41,26 @@ export default {
     },
     async fetchQuestionList() {
       const res = await apiHandler.fetchQuestionsForCategory(this.id);
-
-      this.questions = res.questions
+      this.questions = res.questions;
+      console.log(this.questions);
     },
     async fetchQuestion(questionID) {
       const response = await apiHandler.fetchOneQuestionForCategory(this.id, questionID);
-
       this.question = response.questions[0];
-    }
+      console.log(this.question);
+    },
   },
 
   components: {
+    Question,
     Answer,
     TimerBar,
   },
 
   async created() {
     await this.fetchQuestionList();
-    await this.fetchQuestion(this.questions[this.currentQuestion].id)
+    await this.fetchQuestion(this.questions[this.currentQuestion].id);
+    console.log(this.questions[this.currentQuestion].id);
   }
-
 };
 </script>
