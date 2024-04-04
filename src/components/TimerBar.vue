@@ -14,20 +14,28 @@ export default {
     return {
       timeLeft: 5,
       progress: 100,
+      interval: null,
     };
   },
 
   methods: {
     startTimer() {
-      const interval = setInterval(() => {
+      this.timeLeft = 5;
+      this.progress = 100;
+
+      this.interval = setInterval(() => {
         this.timeLeft -= 1;
         this.progress = (this.timeLeft / 5) * 100;
 
         if (this.timeLeft === 0) {
-          clearInterval(interval);
+          clearInterval(this.interval);
           this.$emit('time-is-up');
         }
       }, 1000);
+    },
+
+    stopTimer() {
+      clearInterval(this.interval);
     },
   },
 

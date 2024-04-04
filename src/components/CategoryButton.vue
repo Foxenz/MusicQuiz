@@ -20,11 +20,6 @@ export default {
       type: Number,
       required: true,
     },
-
-    categoryColor: {
-      type: String,
-      required: true,
-    },
   },
 
   methods: {

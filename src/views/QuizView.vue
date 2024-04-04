@@ -1,17 +1,36 @@
 <template>
-    <div v-if="showOverlay" @click="showOverlay = false" class="overlay">
-        <p>Cliquez n'importe ou pour commencer le quiz</p>
-    </div>
+  <div v-if="showOverlay" @click="showOverlay = false" class="overlay">
+    <p>Cliquez n'importe ou pour commencer le quiz</p>
+  </div>
 
-    <div v-else class="quiz">
-        <p>Quiz id: {{ id }}</p>
-        <Question :question="question"/>
-        <TimerBar @time-is-up="stopQuestion"/>
-        <Answer :questionContent="question.content" :answer="question.answer" @rightAnswer="handleRightAnswer"/>
-    </div>
-    <button v-if="rightAnswer !== null && this.currentQuestion < this.questions.length - 1" @click="nextQuestion()">Next
-    </button>
-    <button v-if="rightAnswer !== null && this.currentQuestion === this.questions.length - 1" @click="gotToScore()">Show score</button>
+  <div v-else class="quiz">
+    <p>Quiz id: {{ id }}</p>
+    <!-- <Question :question="question"/> -->
+    <TimerBar ref="timer" @time-is-up="stopQuestion" />
+    <Answer
+      :questionContent="question.content"
+      :answer="question.answer"
+      @rightAnswer="handleRightAnswer"
+    />
+  </div>
+  <button
+    v-if="
+      (rightAnswer !== null &&
+        this.currentQuestion < this.questions.length - 1) ||
+      timeIsUp
+    "
+    @click="nextQuestion()"
+  >
+    Next
+  </button>
+  <button
+    v-if="
+      rightAnswer !== null && this.currentQuestion === this.questions.length - 1
+    "
+    @click="gotToScore()"
+  >
+    Show score
+  </button>
 </template>
 
 <script>
@@ -23,7 +42,7 @@ import Question from '@/components/Question.vue';
 const apiHandler = new ApiHandler();
 
 export default {
-    name: 'QuizView',
+  name: 'QuizView',
 
   data() {
     return {
@@ -37,43 +56,54 @@ export default {
     };
   },
 
-    methods: {
-        stopQuestion() {
-            console.log('Time is up!');
-        },
-        handleRightAnswer(isCorrect) {
-            this.rightAnswer = isCorrect;
-        },
-        nextQuestion() {
-            this.currentQuestion++;
-            this.rightAnswer = null;
-            this.fetchQuestion(this.questions[this.currentQuestion].id)
-        },
-        gotToScore() {
-            this.$router.push(`/result`);
-        },
-        async fetchQuestionList() {
-            const res = await apiHandler.fetchQuestionsForCategory(this.id);
-
-            this.questions = res.questions
-        },
-        async fetchQuestion(questionID) {
-            const response = await apiHandler.fetchOneQuestionForCategory(this.id, questionID);
-
-            this.question = response.questions[0];
-        }
+  methods: {
+    stopQuestion() {
+      this.rightAnswer = false;
+      this.timeIsUp = true;
     },
 
-    components: {
-        Answer,
-        TimerBar,
+    handleRightAnswer(isCorrect) {
+      this.$refs.timer.stopTimer();
+      this.rightAnswer = isCorrect;
     },
 
-    async created() {
-        await this.fetchQuestionList();
-        await this.fetchQuestion(this.questions[this.currentQuestion].id)
-    }
+    nextQuestion() {
+      this.currentQuestion++;
+      this.rightAnswer = null;
+      this.timeIsUp = false;
+      this.fetchQuestion(this.questions[this.currentQuestion].id);
+      this.$refs.timer.startTimer();
+    },
 
+    gotToScore() {
+      this.$router.push(`/result`);
+    },
+
+    async fetchQuestionList() {
+      const res = await apiHandler.fetchQuestionsForCategory(this.id);
+
+      this.questions = res.questions;
+    },
+
+    async fetchQuestion(questionID) {
+      const response = await apiHandler.fetchOneQuestionForCategory(
+        this.id,
+        questionID
+      );
+
+      this.question = response.questions[0];
+    },
+  },
+
+  components: {
+    Answer,
+    TimerBar,
+  },
+
+  async created() {
+    await this.fetchQuestionList();
+    await this.fetchQuestion(this.questions[this.currentQuestion].id);
+  },
 };
 </script>
 
