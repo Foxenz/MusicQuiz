@@ -14,3 +14,14 @@ body{
     height: 100%;
 }
 
+h1 {
+    font-family: 'Maiden Orange', sans-serif;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+}
+
+button {
+    font-family: 'Maiden Orange', sans-serif;
+}

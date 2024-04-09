@@ -1,10 +1,20 @@
 <template>
   <button
     @click="goToQuizzPage(categoryId)"
-    type="button"
-    class="h-3/4 w-3/4 text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center transition-transform duration-300 transform hover:scale-105"
+    class="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group ml-5 mr-5"
   >
-    {{ categoryName }}
+    <span
+      class="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-yellow-400 rounded-md group-hover:mt-0 group-hover:ml-0"
+    ></span>
+    <span class="absolute inset-0 w-full h-full bg-white rounded-md"></span>
+    <span
+      class="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-yellow-400 rounded-md opacity-0 group-hover:opacity-100"
+    ></span>
+    <span
+      class="relative text-yellow-400 transition-colors duration-200 ease-in-out delay-100 group-hover:text-white"
+    >
+      {{ categoryName }}</span
+    >
   </button>
 </template>
 
