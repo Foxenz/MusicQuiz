@@ -1,36 +1,43 @@
 <template>
-  <div v-if="showOverlay" @click="showOverlay = false" class="overlay">
-    <p>Cliquez n'importe ou pour commencer le quiz</p>
-  </div>
+  <main class="bg-[#0a0724] min-h-screen text-white">
+    <div
+      v-if="showOverlay"
+      @click="showOverlay = false"
+      class="fixed inset-0 flex justify-center items-center text-white cursor-pointer"
+    >
+      <p>Cliquez n'importe où pour commencer le quiz</p>
+    </div>
 
-  <div v-else class="quiz">
-    <p>Quiz id: {{ id }}</p>
-    <!-- <Question :question="question"/> -->
-    <TimerBar ref="timer" @time-is-up="stopQuestion" />
-    <Answer
-      :questionContent="question.content"
-      :answer="question.answer"
-      @rightAnswer="handleRightAnswer"
-    />
-  </div>
-  <button
-    v-if="
-      (rightAnswer !== null &&
-        this.currentQuestion < this.questions.length - 1) ||
-      timeIsUp
-    "
-    @click="nextQuestion()"
-  >
-    Next
-  </button>
-  <button
-    v-if="
-      rightAnswer !== null && this.currentQuestion === this.questions.length - 1
-    "
-    @click="gotToScore()"
-  >
-    Show score
-  </button>
+    <div v-else class="quiz">
+      <p>Quiz id: {{ id }}</p>
+      <!-- <Question :question="question"/> -->
+      <TimerBar ref="timer" @time-is-up="stopQuestion" />
+      <Answer
+        :questionContent="question.content"
+        :answer="question.answer"
+        @rightAnswer="handleRightAnswer"
+      />
+    </div>
+    <button
+      v-if="
+        (rightAnswer !== null &&
+          this.currentQuestion < this.questions.length - 1) ||
+        timeIsUp
+      "
+      @click="nextQuestion()"
+    >
+      Next
+    </button>
+    <button
+      v-if="
+        rightAnswer !== null &&
+        this.currentQuestion === this.questions.length - 1
+      "
+      @click="gotToScore()"
+    >
+      Show score
+    </button>
+  </main>
 </template>
 
 <script>
@@ -107,20 +114,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  cursor: pointer;
-}
-</style>
