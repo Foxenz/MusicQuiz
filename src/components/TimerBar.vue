@@ -1,7 +1,10 @@
 <template>
-  <div class="timer-bar">
-    <div class="timer-bar__inner" :style="{ width: `${progress}%` }"></div>
-    <p>Time left: {{ timeLeft }}</p>
+  <div class="w-full h-5 bg-gray-300 rounded-md mb-4">
+    <div
+      class="h-full bg-yellow-500 rounded-md"
+      :style="{ width: `${progress}%` }"
+    ></div>
+    <p class="text-center text-yellow-500">Time left: {{ timeLeft }}</p>
   </div>
 </template>
 
@@ -44,23 +47,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-.timer-bar {
-  width: 100%;
-  height: 20px;
-  background-color: #f1f1f1;
-  border-radius: 10px;
-  margin-bottom: 10px;
-
-  &__inner {
-    height: 100%;
-    background-color: green;
-    border-radius: 10px;
-  }
-
-  p {
-    text-align: center;
-  }
-}
-</style>

@@ -5,11 +5,12 @@
       @click="showOverlay = false"
       class="fixed inset-0 flex justify-center items-center text-white cursor-pointer"
     >
-      <p>Cliquez n'importe où pour commencer le quiz</p>
+      <h1 class="uppercase text-2xl text-yellow-400">
+        Cliquez n'importe où pour commencer le quiz
+      </h1>
     </div>
 
     <div v-else class="quiz">
-      <p>Quiz id: {{ id }}</p>
       <!-- <Question :question="question"/> -->
       <TimerBar ref="timer" @time-is-up="stopQuestion" />
       <Answer
