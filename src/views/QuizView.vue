@@ -10,35 +10,37 @@
       </h1>
     </div>
 
-  <div v-else class="quiz">
-    <p>Quiz id: {{ id }}</p>
-    <Question :question="question" :sound_url="sound_url" />
-    <TimerBar ref="timer" @time-is-up="stopQuestion" />
-    <Answer
-      :questionContent="question.content"
-      :answer="question.answer"
-      :points="question.points"
-      @rightAnswer="handleRightAnswer"
-    />
-  </div>
-  <button
-    v-if="
-      (rightAnswer !== null &&
-        this.currentQuestion < this.questions.length - 1) ||
-      timeIsUp
-    "
-    @click="nextQuestion()"
-  >
-    Next
-  </button>
-  <button
-    v-if="
-      rightAnswer !== null && this.currentQuestion === this.questions.length - 1
-    "
-    @click="gotToScore()"
-  >
-    Show score
-  </button>
+    <div v-else class="quiz">
+      <p>Quiz id: {{ id }}</p>
+      <Question :question="question" :sound_url="sound_url" />
+      <TimerBar ref="timer" @time-is-up="stopQuestion" />
+      <Answer
+        :questionContent="question.content"
+        :answer="question.answer"
+        :points="question.points"
+        @rightAnswer="handleRightAnswer"
+      />
+    </div>
+    <button
+      v-if="
+        (rightAnswer !== null &&
+          this.currentQuestion < this.questions.length - 1) ||
+        timeIsUp
+      "
+      @click="nextQuestion()"
+    >
+      Next
+    </button>
+    <button
+      v-if="
+        rightAnswer !== null &&
+        this.currentQuestion === this.questions.length - 1
+      "
+      @click="gotToScore()"
+    >
+      Show score
+    </button>
+  </main>
 </template>
 
 <script>
@@ -87,7 +89,7 @@ export default {
     },
 
     gotToScore() {
-      this.$router.push(`/result`);
+      this.$router.push(`/result/${this.score}`);
     },
 
     async fetchQuestionList() {
