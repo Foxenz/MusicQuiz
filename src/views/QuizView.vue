@@ -29,7 +29,7 @@ import Question from "@/components/Question.vue";
 import TimerBar from '@/components/TimerBar.vue';
 import ApiHandler from '@/services/api/apiHandler.js';
 import Answer from '@/components/Answer.vue';
-import Question from '@/components/Question.vue';
+
 
 const apiHandler = new ApiHandler();
 
