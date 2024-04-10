@@ -13,13 +13,16 @@
         :key="category.id"
         :categoryName="category.title"
         :categoryId="category.id"
-        :disabled="!category.is_active"
+        :isDisabled="!category.is_active"
         class="mb-4"
       />
 
-      <p class="text-sm mt-4 text-white">
-        <span class="font-semibold">Note :</span> Les catégories désactivées
-        sortiront prochainement.
+      <p class="text-sm mt-4 text-white italic">
+        <span class="font-semibold not-italic">Note :</span> Les catégories
+        <span class="text-yellow-400 font-black not-italic">désactivées</span>
+        sortiront
+        <span class="text-yellow-400 font-black not-italic">prochainement</span
+        >.
       </p>
     </div>
   </main>

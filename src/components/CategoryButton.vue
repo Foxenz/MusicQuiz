@@ -1,5 +1,6 @@
 <template>
   <button
+    v-if="!isDisabled"
     @click="goToQuizzPage(categoryId)"
     class="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group ml-5 mr-5"
   >
@@ -16,6 +17,25 @@
       {{ categoryName }}</span
     >
   </button>
+
+  <button
+    v-else
+    title="Cette catégorie n'est pas encore disponible"
+    class="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group ml-5 mr-5 opacity-50 cursor-not-allowed"
+  >
+    <span
+      class="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-yellow-400 rounded-md"
+    ></span>
+    <span class="absolute inset-0 w-full h-full bg-white rounded-md"></span>
+    <span
+      class="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-yellow-400 rounded-md opacity-0"
+    ></span>
+    <span
+      class="flex items-center justify-center relative text-yellow-400 transition-colors duration-200 ease-in-out delay-100 tracking-wide uppercase font-black"
+    >
+      {{ categoryName }}
+    </span>
+  </button>
 </template>
 
 <script>
@@ -28,6 +48,11 @@ export default {
 
     categoryId: {
       type: Number,
+      required: true,
+    },
+
+    isDisabled: {
+      type: Boolean,
       required: true,
     },
   },
