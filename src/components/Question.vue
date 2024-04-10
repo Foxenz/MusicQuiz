@@ -1,5 +1,5 @@
 <template>
-    <main class="flex items-center justify-center flex-col ">
+    <main class="flex items-center justify-center flex-col">
         <div class="container flex-none px-12 pt-6 pb-0">
             <div class="rounded-lg bg-gray-100 p-2 text-center shadow-box font-bold text-gray-800 mb-3">
                 <div class="bg-white p-5">
@@ -8,9 +8,9 @@
                 </div>
                 <!-- Plays music for the category page music conditionally -->
                 <!-- Having problem passing BlindTest as a child component here any help! -->
-                <div v-if="question.category_id === 2" class="flex items-center justify-center">
-                    <audio controls autoplay>
-                        <source :src="question.content.sound_url" type="audio/mpeg">
+                <div v-if="sound_url !== ''" class="flex items-center justify-center">
+                    <audio ref="audioplayer" controls autoplay>
+                        <source :src="sound_url" type="audio/mpeg">
                     </audio>
                 </div>
             </div>
@@ -23,8 +23,17 @@
 
 export default {
     props: {
-        question: Object
+        question: Object,
+        sound_url: ""
     },
+    watch: {
+        'sound_url': function (newUrl, oldUrl) {
+            if (newUrl !== oldUrl) {
+                this.$refs.audioplayer.load();
+                this.$refs.audioplayer.play();
+            }
+        }
+    }
 
 };
 </script>

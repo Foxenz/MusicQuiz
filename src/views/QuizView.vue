@@ -5,7 +5,7 @@
 
   <div v-else class="quiz">
     <p>Quiz id: {{ id }}</p>
-    <Question :question="question" />
+    <Question :question="question" :sound_url="sound_url" />
     <TimerBar ref="timer" @time-is-up="stopQuestion" />
     <Answer :questionContent="question.content" :answer="question.answer" :points="question.points"
       @handleRightAnswer="handleRightAnswer" />
@@ -46,6 +46,7 @@ export default {
       rightAnswer: null,
       showOverlay: true,
       score: 0,
+      sound_url: '',
     };
   },
 
@@ -88,12 +89,15 @@ export default {
       );
 
       this.question = response.questions[0];
+      this.sound_url = this.question.content.sound_url ? this.question.content.sound_url : '';
+      console.log(this.sound_url);
     },
   },
 
   components: {
     Answer,
     TimerBar,
+    Question,
   },
 
   async created() {
