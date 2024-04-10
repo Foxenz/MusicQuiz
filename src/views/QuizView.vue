@@ -7,29 +7,38 @@
     <p>Quiz id: {{ id }}</p>
     <Question :question="question" :sound_url="sound_url" />
     <TimerBar ref="timer" @time-is-up="stopQuestion" />
-    <Answer :questionContent="question.content" :answer="question.answer" :points="question.points"
-      @handleRightAnswer="handleRightAnswer" />
+    <Answer
+      :questionContent="question.content"
+      :answer="question.answer"
+      :points="question.points"
+      @handleRightAnswer="handleRightAnswer"
+    />
   </div>
-  <button v-if="
-    (rightAnswer !== null &&
-      this.currentQuestion < this.questions.length - 1) ||
-    timeIsUp
-  " @click="nextQuestion()">
+  <button
+    v-if="
+      (rightAnswer !== null &&
+        this.currentQuestion < this.questions.length - 1) ||
+      timeIsUp
+    "
+    @click="nextQuestion()"
+  >
     Next
   </button>
-  <button v-if="
-    rightAnswer !== null && this.currentQuestion === this.questions.length - 1
-  " @click="gotToScore()">
+  <button
+    v-if="
+      rightAnswer !== null && this.currentQuestion === this.questions.length - 1
+    "
+    @click="gotToScore()"
+  >
     Show score
   </button>
 </template>
 
 <script>
-import Question from "@/components/Question.vue";
+import Question from '@/components/Question.vue';
 import TimerBar from '@/components/TimerBar.vue';
 import ApiHandler from '@/services/api/apiHandler.js';
 import Answer from '@/components/Answer.vue';
-
 
 const apiHandler = new ApiHandler();
 
@@ -89,8 +98,9 @@ export default {
       );
 
       this.question = response.questions[0];
-      this.sound_url = this.question.content.sound_url ? this.question.content.sound_url : '';
-      console.log(this.sound_url);
+      this.sound_url = this.question.content.sound_url
+        ? this.question.content.sound_url
+        : '';
     },
   },
 
