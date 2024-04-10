@@ -1,11 +1,13 @@
 <template>
-  <div class="w-full h-5 bg-gray-300 rounded-md mb-4">
-    <div
-      class="h-full bg-yellow-500 rounded-md"
-      :style="{ width: `${progress}%` }"
-    ></div>
-    <p class="text-center text-yellow-500">Time left: {{ timeLeft }}</p>
-  </div>
+  <section class="flex justify-center">
+    <div class="w-11/12 h-8 bg-gray-300 rounded-full mb-4 text-center">
+      <div
+        class="h-full bg-yellow-500 rounded-full"
+        :style="{ width: `${progress}%` }"
+      ></div>
+      <p class="text-center text-white mt-3">Temps restant: {{ timeLeft }}</p>
+    </div>
+  </section>
 </template>
 
 <script>

@@ -1,40 +1,41 @@
 <template>
-  <div>
-    <div v-if="Array.isArray(questionContent.answers)" class="flex gap-1">
+  <section>
+    <!-- Multiple choice -->
+    <div
+      v-if="Array.isArray(questionContent.answers)"
+      class="grid grid-cols-2 gap-4 mt-10"
+    >
       <div v-for="(option, index) in questionContent.answers" :key="index">
         <button
           @click="checkAnswer(option)"
-          class="bg-yellow-500 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition-colors duration-200 ease-in-out"
+          class="bg-yellow-400 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition-colors duration-200 ease-in-out w-full"
         >
           {{ option }}
         </button>
       </div>
     </div>
 
-    <div v-else>
-      <label
-        class="block text-gray-700 text-sm font-bold mb-2"
-        for="input-answer"
-      >
-        Input Answer
-      </label>
+    <!-- Input -->
+    <div v-else class="text-center mt-10">
       <input
         v-model="inputValue"
-        class="shadow appearance-none border rounded w-[250px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="bg-gray-100 p-2 text-center shadow-box font-bold text-gray-800 mb-3 w-1/4"
         id="input-answer"
         type="text"
-        placeholder="Answer here"
+        placeholder="..."
       />
+
+      <br />
 
       <button
         @click="checkAnswer(inputValue)"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-yellow-400 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition-colors duration-200 ease-in-out"
         type="button"
       >
-        Confirm
+        Confirmer
       </button>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

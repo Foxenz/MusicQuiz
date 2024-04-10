@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-[#0a0724] min-h-screen text-white">
+  <main class="bg-[#0a0724] text-white">
     <div
       v-if="showOverlay"
       @click="showOverlay = false"
@@ -10,36 +10,40 @@
       </h1>
     </div>
 
-    <div v-else class="quiz">
-      <p>Quiz id: {{ id }}</p>
-      <Question :question="question" :sound_url="sound_url" />
-      <TimerBar ref="timer" @time-is-up="stopQuestion" />
+    <div v-else>
+      <Question :question="question" :sound_url="sound_url" class="test" />
+      <TimerBar class="mt-[50px]" ref="timer" @time-is-up="stopQuestion" />
+
+      <div
+        v-if="
+          (rightAnswer !== null &&
+            this.currentQuestion < this.questions.length - 1) ||
+          timeIsUp
+        "
+        class="text-center mt-[50px]"
+      >
+        <p>La bonne réponse était :</p>
+        <p class="text-yellow-400">{{ question.answer }}</p>
+        <button class="mt-[50px]" @click="nextQuestion()">Suivant</button>
+        <button
+          v-if="
+            rightAnswer !== null &&
+            this.currentQuestion === this.questions.length - 1
+          "
+          @click="gotToScore()"
+        >
+          Show score
+        </button>
+      </div>
+
       <Answer
+        class="mt-[50px]"
         :questionContent="question.content"
         :answer="question.answer"
         :points="question.points"
         @rightAnswer="handleRightAnswer"
       />
     </div>
-    <button
-      v-if="
-        (rightAnswer !== null &&
-          this.currentQuestion < this.questions.length - 1) ||
-        timeIsUp
-      "
-      @click="nextQuestion()"
-    >
-      Next
-    </button>
-    <button
-      v-if="
-        rightAnswer !== null &&
-        this.currentQuestion === this.questions.length - 1
-      "
-      @click="gotToScore()"
-    >
-      Show score
-    </button>
   </main>
 </template>
 
