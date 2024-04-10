@@ -10,42 +10,42 @@
       </h1>
     </div>
 
-    <div v-else class="quiz">
-      <!-- <Question :question="question"/> -->
-      <TimerBar ref="timer" @time-is-up="stopQuestion" />
-      <Answer
-        :questionContent="question.content"
-        :answer="question.answer"
-        @rightAnswer="handleRightAnswer"
-      />
-    </div>
-    <button
-      v-if="
-        (rightAnswer !== null &&
-          this.currentQuestion < this.questions.length - 1) ||
-        timeIsUp
-      "
-      @click="nextQuestion()"
-    >
-      Next
-    </button>
-    <button
-      v-if="
-        rightAnswer !== null &&
-        this.currentQuestion === this.questions.length - 1
-      "
-      @click="gotToScore()"
-    >
-      Show score
-    </button>
-  </main>
+  <div v-else class="quiz">
+    <p>Quiz id: {{ id }}</p>
+    <Question :question="question" :sound_url="sound_url" />
+    <TimerBar ref="timer" @time-is-up="stopQuestion" />
+    <Answer
+      :questionContent="question.content"
+      :answer="question.answer"
+      :points="question.points"
+      @rightAnswer="handleRightAnswer"
+    />
+  </div>
+  <button
+    v-if="
+      (rightAnswer !== null &&
+        this.currentQuestion < this.questions.length - 1) ||
+      timeIsUp
+    "
+    @click="nextQuestion()"
+  >
+    Next
+  </button>
+  <button
+    v-if="
+      rightAnswer !== null && this.currentQuestion === this.questions.length - 1
+    "
+    @click="gotToScore()"
+  >
+    Show score
+  </button>
 </template>
 
 <script>
+import Question from '@/components/Question.vue';
 import TimerBar from '@/components/TimerBar.vue';
 import ApiHandler from '@/services/api/apiHandler.js';
 import Answer from '@/components/Answer.vue';
-import Question from '@/components/Question.vue';
 
 const apiHandler = new ApiHandler();
 
@@ -61,6 +61,8 @@ export default {
       question: { content: {}, answer: '' },
       rightAnswer: null,
       showOverlay: true,
+      score: 0,
+      sound_url: '',
     };
   },
 
@@ -101,12 +103,16 @@ export default {
       );
 
       this.question = response.questions[0];
+      this.sound_url = this.question.content.sound_url
+        ? this.question.content.sound_url
+        : '';
     },
   },
 
   components: {
     Answer,
     TimerBar,
+    Question,
   },
 
   async created() {
