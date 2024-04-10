@@ -11,14 +11,12 @@
     </div>
 
     <div v-else class="quiz">
-      <p>Quiz id: {{ id }}</p>
-      <Question :question="question" />
+      <!-- <Question :question="question"/> -->
       <TimerBar ref="timer" @time-is-up="stopQuestion" />
       <Answer
         :questionContent="question.content"
         :answer="question.answer"
-        :points="question.points"
-        @handleRightAnswer="handleRightAnswer"
+        @rightAnswer="handleRightAnswer"
       />
     </div>
     <button
@@ -44,10 +42,10 @@
 </template>
 
 <script>
-import Question from '@/components/Question.vue';
 import TimerBar from '@/components/TimerBar.vue';
 import ApiHandler from '@/services/api/apiHandler.js';
 import Answer from '@/components/Answer.vue';
+import Question from '@/components/Question.vue';
 
 const apiHandler = new ApiHandler();
 
@@ -63,7 +61,6 @@ export default {
       question: { content: {}, answer: '' },
       rightAnswer: null,
       showOverlay: true,
-      score: 0,
     };
   },
 
@@ -74,11 +71,9 @@ export default {
       this.timeIsUp = true;
     },
 
-    handleRightAnswer(points) {
+    handleRightAnswer(isCorrect) {
       this.$refs.timer.stopTimer();
-      this.score += points;
-
-      this.rightAnswer = points > 0;
+      this.rightAnswer = isCorrect;
     },
 
     nextQuestion() {
@@ -90,7 +85,7 @@ export default {
     },
 
     gotToScore() {
-      this.$router.push(`/result/${this.score}`);
+      this.$router.push(`/result`);
     },
 
     async fetchQuestionList() {
