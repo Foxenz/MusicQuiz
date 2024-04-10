@@ -3,9 +3,9 @@
     <div
       v-if="showOverlay"
       @click="showOverlay = false"
-      class="fixed inset-0 flex justify-center items-center text-white cursor-pointer"
+      class="fixed inset-0 flex justify-center items-center cursor-pointer"
     >
-      <h1 class="uppercase text-2xl text-yellow-400">
+      <h1 class="uppercase text-2xl font-black tracking-wide">
         Cliquez n'importe où pour commencer le quiz
       </h1>
     </div>

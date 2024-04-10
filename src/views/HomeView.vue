@@ -2,9 +2,9 @@
   <main class="bg-[#0a0724] min-h-screen flex items-center justify-center">
     <div class="text-center">
       <h1 class="text-5xl font-semibold mb-4 uppercase text-yellow-400">
-        Bienvenue sur MusicQuiz !
+        <span class="text-white">Bienvenue sur</span> MusicQuiz !
       </h1>
-      <p class="text-lg mb-8 text-yellow-400">
+      <p class="text-lg mb-8 text-white">
         Choisissez une catégorie pour commencer à jouer :
       </p>
 
@@ -17,7 +17,7 @@
         class="mb-4"
       />
 
-      <p class="text-sm mt-4 text-yellow-400">
+      <p class="text-sm mt-4 text-white">
         <span class="font-semibold">Note :</span> Les catégories désactivées
         sortiront prochainement.
       </p>

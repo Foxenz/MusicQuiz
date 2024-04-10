@@ -11,7 +11,7 @@
       class="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-yellow-400 rounded-md opacity-0 group-hover:opacity-100"
     ></span>
     <span
-      class="relative text-yellow-400 transition-colors duration-200 ease-in-out delay-100 group-hover:text-white"
+      class="relative text-yellow-400 transition-colors duration-200 ease-in-out delay-100 group-hover:text-white tracking-wide uppercase font-black"
     >
       {{ categoryName }}</span
     >
