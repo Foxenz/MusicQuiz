@@ -19,7 +19,7 @@ import LeaderBoard from '@/components/LeaderBoard.vue';
 export default {
   data() {
     return {
-      result: 25,
+      result: this.$route.params.score,
     };
   },
 
