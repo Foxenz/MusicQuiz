@@ -24,13 +24,27 @@
       >
         <p>La bonne réponse était :</p>
         <p class="text-yellow-400">{{ question.answer }}</p>
-
-        <!-- Next button -->
-        <button @click="nextQuestion" class="mt-10">Question suivante -</button>
-
-        <!-- Show score -->
-        <button @click="gotToScore" class="mt-10">- Voir le score</button>
       </div>
+
+      <button
+        v-if="
+          (rightAnswer !== null &&
+            this.currentQuestion < this.questions.length - 1) ||
+          timeIsUp
+        "
+        @click="nextQuestion()"
+      >
+        Next
+      </button>
+      <button
+        v-if="
+          rightAnswer !== null &&
+          this.currentQuestion === this.questions.length - 1
+        "
+        @click="gotToScore()"
+      >
+        Show score
+      </button>
 
       <Answer
         :questionContent="question.content"
