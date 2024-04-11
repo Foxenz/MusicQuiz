@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-[#0a0724] text-white">
+  <main class="flex justify-center items-center bg-[#0a0724] text-white">
     <div
       v-if="showOverlay"
       @click="showOverlay = false"
@@ -11,8 +11,8 @@
     </div>
 
     <div v-else>
-      <Question :question="question" :sound_url="sound_url" class="test" />
-      <TimerBar class="mt-[50px]" ref="timer" @time-is-up="stopQuestion" />
+      <Question :question="question" :sound_url="sound_url" />
+      <TimerBar ref="timer" @time-is-up="stopQuestion" />
 
       <div
         v-if="
@@ -24,20 +24,15 @@
       >
         <p>La bonne réponse était :</p>
         <p class="text-yellow-400">{{ question.answer }}</p>
-        <button class="mt-[50px]" @click="nextQuestion()">Suivant</button>
-        <button
-          v-if="
-            rightAnswer !== null &&
-            this.currentQuestion === this.questions.length - 1
-          "
-          @click="gotToScore()"
-        >
-          Show score
-        </button>
+
+        <!-- Next button -->
+        <button @click="nextQuestion" class="mt-10">Question suivante -</button>
+
+        <!-- Show score -->
+        <button @click="gotToScore" class="mt-10">- Voir le score</button>
       </div>
 
       <Answer
-        class="mt-[50px]"
         :questionContent="question.content"
         :answer="question.answer"
         :points="question.points"
