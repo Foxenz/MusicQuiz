@@ -90,7 +90,7 @@ export default {
     },
 
     gotToScore() {
-        this.$router.push(`/result/${this.score*10}`);
+        this.$router.push(`/result/${this.id}/${this.score*10}`);
     },
 
     async fetchQuestionList() {

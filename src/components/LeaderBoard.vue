@@ -1,23 +1,21 @@
 <template>
-  <section class="leaderboard">
-    <h2>Leaderboard</h2>
-    <ol>
-      <li v-for="(score, index) in scores" :key="index">
-        {{ score.name }}: {{ score.score }}
-      </li>
-    </ol>
-  </section>
+    <section class="leaderboard">
+        <h2>Leaderboard</h2>
+        <ol>
+            <li v-for="(score, index) in scoreBoard" :key="index">
+                {{ score.name }}: {{ score.score }}
+            </li>
+        </ol>
+    </section>
 </template>
 
 <script>
 export default {
-  name: 'LeaderBoard',
+    name: 'LeaderBoard',
 
-  data() {
-    return {
-      scores: [],
-    };
-  },
+    props: {
+        scoreBoard: Array,
+    },
 };
 </script>
 
