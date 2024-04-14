@@ -15,13 +15,7 @@ export default {
 
   data() {
     return {
-      scores: [
-        { name: 'John Doe', score: 25 },
-        { name: 'Jane Doe', score: 20 },
-        { name: 'John Smith', score: 15 },
-        { name: 'Jane Smith', score: 10 },
-        { name: 'John Johnson', score: 5 },
-      ],
+      scores: [],
     };
   },
 };

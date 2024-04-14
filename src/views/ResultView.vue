@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       result: this.$route.params.score,
+        name: "",
     };
   },
 
