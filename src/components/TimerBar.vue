@@ -1,6 +1,6 @@
 <template>
   <section class="flex justify-center">
-    <div class="w-11/12 h-8 bg-gray-300 rounded-full mb-4 text-center">
+    <div class="w-11/12 h-8 bg-gray-300 rounded-full text-center">
       <div
         class="h-full bg-yellow-500 rounded-full"
         :style="{ width: `${progress}%` }"
@@ -17,7 +17,7 @@ export default {
 
   data() {
     return {
-      timeLeft: 5,
+      timeLeft: 20,
       progress: 100,
       interval: null,
     };
@@ -25,12 +25,12 @@ export default {
 
   methods: {
     startTimer() {
-      this.timeLeft = 5;
+      this.timeLeft = 20;
       this.progress = 100;
 
       this.interval = setInterval(() => {
         this.timeLeft -= 1;
-        this.progress = (this.timeLeft / 5) * 100;
+        this.progress = (this.timeLeft / 20) * 100;
 
         if (this.timeLeft === 0) {
           clearInterval(this.interval);

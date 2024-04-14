@@ -16,10 +16,10 @@
     </div>
 
     <!-- Input -->
-    <div v-else class="text-center mt-10">
+    <div v-else class="text-center">
       <input
         v-model="inputValue"
-        class="bg-gray-100 p-2 text-center shadow-box font-bold text-gray-800 mb-3 w-1/4"
+        class="bg-gray-100 p-2 text-center shadow-box font-bold text-gray-800 mb-3 w-1/4 border-2 border-gray-300"
         id="input-answer"
         type="text"
         placeholder="..."
@@ -50,6 +50,10 @@ export default {
   methods: {
     checkAnswer(value) {
       this.$emit('rightAnswer', value === this.answer);
+    },
+
+    resetAnswer() {
+      this.inputValue = '';
     },
   },
 };

@@ -12,46 +12,46 @@
 
     <div v-else>
       <Question :question="question" :sound_url="sound_url" />
-      <TimerBar ref="timer" @time-is-up="stopQuestion" />
-
-      <div
-        v-if="
-          (rightAnswer !== null &&
-            this.currentQuestion < this.questions.length - 1) ||
-          timeIsUp
-        "
-        class="text-center mt-[50px]"
-      >
-        <p>La bonne réponse était :</p>
-        <p class="text-yellow-400">{{ question.answer }}</p>
-      </div>
-
-      <button
-        v-if="
-          (rightAnswer !== null &&
-            this.currentQuestion < this.questions.length - 1) ||
-          timeIsUp
-        "
-        @click="nextQuestion()"
-      >
-        Next
-      </button>
-      <button
-        v-if="
-          rightAnswer !== null &&
-          this.currentQuestion === this.questions.length - 1
-        "
-        @click="gotToScore()"
-      >
-        Show score
-      </button>
+      <TimerBar class="mb-[75px]" ref="timer" @time-is-up="stopQuestion" />
 
       <Answer
+        v-if="!showAnswer && !timeIsUp"
+        ref="answer"
         :questionContent="question.content"
         :answer="question.answer"
         :points="question.points"
         @rightAnswer="handleRightAnswer"
       />
+
+      <section v-else class="text-center">
+        <p v-if="rightAnswer" class="text-green-400">Bonne réponse !</p>
+        <p v-else class="text-red-400">Mauvaise réponse !</p>
+
+        <p>
+          La bonne réponse est :
+          <span class="text-yellow-400">{{ question.answer }}</span>
+        </p>
+
+        <button
+          v-if="
+            (rightAnswer !== null &&
+              this.currentQuestion < this.questions.length - 1) ||
+            timeIsUp
+          "
+          @click="nextQuestion"
+          class="bg-yellow-400 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition-colors duration-200 ease-in-out mt-4"
+        >
+          Question suivante
+        </button>
+
+        <button
+          v-else
+          @click="gotToScore"
+          class="bg-yellow-400 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition-colors duration-200 ease-in-out mt-4 ml-4"
+        >
+          Terminer le quiz
+        </button>
+      </section>
     </div>
   </main>
 </template>
@@ -78,6 +78,7 @@ export default {
       showOverlay: true,
       score: 0,
       sound_url: '',
+      showAnswer: false,
     };
   },
 
@@ -91,14 +92,17 @@ export default {
     handleRightAnswer(isCorrect) {
       this.$refs.timer.stopTimer();
       this.rightAnswer = isCorrect;
+      this.showAnswer = true;
     },
 
     nextQuestion() {
       this.currentQuestion++;
       this.rightAnswer = null;
       this.timeIsUp = false;
+      this.showAnswer = false;
       this.fetchQuestion(this.questions[this.currentQuestion].id);
       this.$refs.timer.startTimer();
+      this.$refs.answer.resetAnswer();
     },
 
     gotToScore() {
