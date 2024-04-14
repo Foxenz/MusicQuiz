@@ -27,7 +27,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/result/:score',
+      path: '/result/:id/:score',
       name: 'result',
       component: () => import('../views/ResultView.vue'),
     },

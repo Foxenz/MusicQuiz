@@ -18,7 +18,7 @@
         :questionContent="question.content"
         :answer="question.answer"
         :points="question.points"
-        @rightAnswer="handleRightAnswer"
+        @handleRightAnswer="handleRightAnswer"
       />
     </div>
     <button
@@ -75,9 +75,10 @@ export default {
       this.timeIsUp = true;
     },
 
-    handleRightAnswer(isCorrect) {
+    handleRightAnswer(points) {
       this.$refs.timer.stopTimer();
-      this.rightAnswer = isCorrect;
+        this.score += points;
+        this.rightAnswer = points > 0;
     },
 
     nextQuestion() {
@@ -89,7 +90,7 @@ export default {
     },
 
     gotToScore() {
-      this.$router.push(`/result/${this.score}`);
+        this.$router.push(`/result/${this.id}/${this.score*10}`);
     },
 
     async fetchQuestionList() {
