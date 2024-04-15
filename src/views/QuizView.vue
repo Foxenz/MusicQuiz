@@ -1,12 +1,13 @@
 <template>
-  <main class="flex justify-center items-center bg-[#0a0724] text-white">
+  <main class="flex justify-center items-center text-white">
     <div
       v-if="showOverlay"
       @click="showOverlay = false"
       class="fixed inset-0 flex justify-center items-center cursor-pointer"
     >
       <h1 class="uppercase text-2xl font-black tracking-wide">
-        Cliquez n'importe où pour commencer le quiz
+        Cliquez <span class="text-yellow-400">n'importe où</span> pour
+        <span class="text-yellow-400">commencez</span> le quiz
       </h1>
     </div>
 

@@ -2,18 +2,21 @@
   <div>
     <input
       v-model="value"
-      class="shadow appearance-none border rounded w-[250px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      class="text-center shadow appearance-none border rounded w-[250px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       id="input-answer"
       type="text"
-      placeholder="Answer here"
+      placeholder="..."
     />
+
+    <br />
+    <br />
 
     <button
       @click="checkAnswer"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      class="bg-yellow-400 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition-colors duration-200 ease-in-out"
       type="button"
     >
-      Confirm
+      Confirmer
     </button>
   </div>
 </template>
