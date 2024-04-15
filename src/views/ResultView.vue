@@ -1,6 +1,8 @@
 <template>
-  <main class="result text-white">
-    <p>Result: {{ result }}</p>
+  <main class="text-white flex flex-col items-center justify-center">
+    <h1 class="uppercase text-4xl font-black tracking-wide mb-4">
+      Résultat : <span class="text-yellow-400"> {{ result }}</span>
+    </h1>
 
     <div v-if="showInput" class="text-center">
       <input
@@ -83,27 +85,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-.result {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  p {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .btn {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-  }
-}
-</style>

@@ -104,7 +104,6 @@ export default {
       this.showAnswer = false;
       this.fetchQuestion(this.questions[this.currentQuestion].id);
       this.$refs.timer.startTimer();
-      this.$refs.answer.resetAnswer();
     },
 
     gotToScore() {
