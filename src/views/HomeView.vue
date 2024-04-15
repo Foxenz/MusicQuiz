@@ -1,8 +1,10 @@
 <template>
   <main class="bg-[#0a0724] min-h-screen flex items-center justify-center">
     <div class="text-center">
-      <h1 class="text-5xl font-semibold mb-4 uppercase text-yellow-400">
-        <span class="text-white tracking-wider">Bienvenue sur</span> MusicQuiz !
+      <h1
+        class="text-5xl font-semibold mb-4 uppercase text-yellow-400 tracking-wider"
+      >
+        <span class="text-white">Bienvenue sur</span> MusicQuiz !
       </h1>
       <p class="text-lg mb-8 text-white">
         Choisissez une catégorie pour commencer à jouer :
