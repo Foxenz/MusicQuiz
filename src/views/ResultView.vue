@@ -36,7 +36,7 @@ export default {
                 let scores = JSON.parse(localStorage.getItem(`category-score${this.id}`)) || [];
 
                 scores.push({ name: this.name, score: this.result });
-                this.scoreBoard = scores;
+                this.scoreBoard = scores.sort((a, b) => b.score - a.score);
 
                 localStorage.setItem(`category-score${this.id}`, JSON.stringify(scores));
 
@@ -52,7 +52,7 @@ export default {
         const storedScores = JSON.parse(localStorage.getItem(`category-score${this.id}`));
 
         if (storedScores) {
-            this.scoreBoard = storedScores;
+            this.scoreBoard = storedScores.sort((a, b) => b.score - a.score);
         }
     },
 
