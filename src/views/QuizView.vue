@@ -25,7 +25,10 @@
       />
 
       <section v-else class="text-center">
-        <p v-if="rightAnswer" class="text-green-400">Bonne réponse !</p>
+        <p v-if="result === 'good'" class="text-green-400">Bonne réponse !</p>
+        <p v-else-if="result === 'average'" class="text-yellow-400">
+          Presque !
+        </p>
         <p v-else class="text-red-400">Mauvaise réponse !</p>
 
         <p>
@@ -80,6 +83,7 @@ export default {
       score: 0,
       sound_url: '',
       showAnswer: false,
+      result: '',
     };
   },
 
@@ -90,10 +94,11 @@ export default {
       this.timeIsUp = true;
     },
 
-    handleRightAnswer(points) {
+    handleRightAnswer(data) {
+      this.result = data.result;
       this.$refs.timer.stopTimer();
-      this.score += points;
-      this.rightAnswer = points > 0;
+      this.score += data.points;
+      this.rightAnswer = data.points > 0;
       this.showAnswer = true;
     },
 

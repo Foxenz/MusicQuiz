@@ -45,6 +45,7 @@ export default {
       const inputValue = value.toLowerCase();
 
       let points = 0;
+      let result = '';
 
       if (Array.isArray(this.answers)) {
         if (answer === inputValue) points = this.points;
@@ -75,15 +76,23 @@ export default {
 
         if (matchPercentage === 100) {
           points = this.points;
+          result = 'good';
         } else if (matchPercentage >= 50) {
           points = this.points / 2;
+          result = 'average';
+        } else {
+          points = 0;
+          result = 'bad';
         }
 
         // Reset the input value
         this.inputValue = '';
       }
 
-      this.$emit('handleRightAnswer', points);
+      this.$emit('handleRightAnswer', {
+        points,
+        result,
+      });
     },
   },
   components: {
