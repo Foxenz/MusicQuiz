@@ -10,11 +10,21 @@ class ApiHandler {
   fetchCategories = async () => {
     const res = await this.axiosInstance('categories');
 
+    const response = this.checkResponse(res)
+
+    if(!response)
+      return null;
+
     return this.checkResponse(res).data;
   };
 
   fetchQuestionsForCategory = async (categoryId) => {
     const res = await this.axiosInstance(`categories/${categoryId}`);
+
+    const response = this.checkResponse(res)
+
+    if(!response)
+      return null;
 
     return this.checkResponse(res).data;
   };
@@ -24,6 +34,11 @@ class ApiHandler {
       `categories/${categoryId}?id=${questionID}`
     );
 
+    const response = this.checkResponse(res)
+
+    if(!response)
+      return null;
+
     return this.checkResponse(res).data;
   };
 
@@ -31,6 +46,11 @@ class ApiHandler {
     const res = await this.axiosInstance('categories?is_active=1').catch(e => {
       console.log("error: ", e)
     });
+
+    const response = this.checkResponse(res)
+
+    if(!response)
+      return null;
 
     return this.checkResponse(res).data.map((category) => category.id);
 
