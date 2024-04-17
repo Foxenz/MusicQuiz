@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 class ApiHandler {
   constructor() {
     this.axiosInstance = axios.create({
@@ -9,13 +10,13 @@ class ApiHandler {
   fetchCategories = async () => {
     const res = await this.axiosInstance('categories');
 
-    return res.data;
+    return this.checkResponse(res).data;
   };
 
   fetchQuestionsForCategory = async (categoryId) => {
     const res = await this.axiosInstance(`categories/${categoryId}`);
 
-    return res.data;
+    return this.checkResponse(res).data;
   };
 
   fetchOneQuestionForCategory = async (categoryId, questionID) => {
@@ -23,15 +24,24 @@ class ApiHandler {
       `categories/${categoryId}?id=${questionID}`
     );
 
-    return res.data;
+    return this.checkResponse(res).data;
   };
 
   getIdCategoriesActivated = async () => {
-    const res = await this.axiosInstance('categories?is_active=1');
-    const id = res.data.map((category) => category.id);
+    const res = await this.axiosInstance('categories?is_active=1').catch(e => {
+      console.log("error: ", e)
+    });
 
-    return id;
+    return this.checkResponse(res).data.map((category) => category.id);
+
   };
+
+  checkResponse = (res) => {
+    if(res)
+      return res;
+    else
+      return null;
+  }
 }
 
 export default ApiHandler;
