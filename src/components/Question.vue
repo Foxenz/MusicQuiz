@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-col justify-center items-center">
     <div
-      class="flex justify-center items-center text-center bg-white border-8 border-yellow-500 p-4 w-[900px] h-[350px]"
+      class="question-container flex justify-center items-center text-center bg-white border-8 border-yellow-500 p-4 w-[900px] h-[350px]"
     >
       <p
         class="text-black text-2xl font-bold leading-loose"
@@ -40,3 +40,18 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+// media queries
+@media (max-width: 1024px) {
+  .question-container {
+    width: 650px;
+  }
+}
+
+@media (max-width: 768px) {
+  .question-container {
+    width: 350px;
+  }
+}
+</style>
