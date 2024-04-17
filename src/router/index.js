@@ -37,6 +37,11 @@ const router = createRouter({
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue'),
     },
+    {
+      path: '/apiNotFound',
+      name: 'api-not-found',
+      component: () => import('../views/ApiNotFoundView.vue')
+    }
   ],
 });
 
